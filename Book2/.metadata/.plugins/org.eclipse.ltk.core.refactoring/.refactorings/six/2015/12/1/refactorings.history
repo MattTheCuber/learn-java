@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Rename type &apos;six.PizzaOrder&apos; to &apos;six&apos;&#x0D;&#x0A;- Original project: &apos;six&apos;&#x0D;&#x0A;- Original element: &apos;six.PizzaOrder&apos;&#x0D;&#x0A;- Renamed element: &apos;six.six&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;PizzaOrder&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;six{PizzaOrder.java[PizzaOrder" matchStrategy="1" name="six" qualified="false" references="true" similarDeclarations="false" stamp="1451406056256" textual="false" version="1.0"/>
-</session>
