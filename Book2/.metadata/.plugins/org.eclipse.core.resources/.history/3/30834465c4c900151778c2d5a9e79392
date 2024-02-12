@@ -1,0 +1,120 @@
+package ten;
+
+import javafx.animation.Interpolator;
+import javafx.animation.TranslateTransition;
+import javafx.application.Application;
+import javafx.geometry.Insets;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.CycleMethod;
+import javafx.scene.paint.RadialGradient;
+import javafx.scene.paint.Stop;
+import javafx.scene.shape.Circle;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import javafx.util.Duration;
+
+public class ten extends Application {
+	double speed = 2000.0;
+	Circle circle;
+    public static void main(String[] args) {
+        launch(args);
+    }
+    @Override public void start(Stage primaryStage) {
+    	circle = new Circle(100);
+    	circle.setFill(new RadialGradient(0.1, 0, 0.4, 0.3, 0.5, true, CycleMethod.NO_CYCLE, 
+    			new Stop(0.0, Color.WHITE), new Stop(1.0, Color.RED)));
+    	
+    	String fontSize = "-fx-font-size:25px;";
+    	
+    	Button up = new Button("˄");
+		up.setOnAction(e -> move("u"));
+		up.setFont(new Font(19));
+		up.setPadding(new Insets(-2, 10, -2, 10));
+    	Button down = new Button("˅");
+		down.setOnAction(e -> move("d"));
+		down.setFont(new Font(19));
+		down.setPadding(new Insets(-2, 10, -2, 10));
+    	Button left = new Button("<");
+		left.setOnAction(e -> move("l"));
+    	left.setStyle(fontSize);
+    	Button right = new Button(">");
+    	right.setStyle(fontSize);
+		right.setOnAction(e -> move("r"));
+    	Button stop = new Button("Stop");
+		stop.setOnAction(e -> move("st"));
+    	stop.setStyle(fontSize);
+    	
+    	Text speedStr = new Text(Double.toString(speed / 1000.0));
+    	speedStr.setStyle("-fx-font-size:35;");
+    	Text start = new Text("Time to get to other side: ");
+    	start.setStyle("-fx-font-size:35;");
+
+    	Button minus = new Button("+");
+    	minus.setStyle(fontSize);
+		minus.setOnAction(e -> {speed += 10.0; speedStr.setText(Double.toString(speed / 1000.0));});
+    	Button plus = new Button("-");
+    	plus.setStyle(fontSize);
+		plus.setOnAction(e -> {speed -= 10.0; speedStr.setText(Double.toString(speed / 1000.0));});
+    	Button minus2 = new Button("++");
+    	minus2.setStyle(fontSize);
+		minus2.setOnAction(e -> {speed += 100.0; speedStr.setText(Double.toString(speed / 1000.0));});
+    	Button plus2 = new Button("--");
+    	plus2.setStyle(fontSize);
+		plus2.setOnAction(e -> {speed -= 100.0; speedStr.setText(Double.toString(speed / 1000.0));});
+    	Button minus3 = new Button("+++");
+    	minus3.setStyle(fontSize);
+		minus3.setOnAction(e -> {speed += 1000.0; speedStr.setText(Double.toString(speed / 1000.0));});
+    	Button plus3 = new Button("---");
+    	plus3.setStyle(fontSize);
+		plus3.setOnAction(e -> {speed -= 1000.0; speedStr.setText(Double.toString(speed / 1000.0));});
+    	
+		VBox middle = new VBox(6, up, down);
+		HBox arrows = new HBox(3, left, middle, right);
+		
+    	HBox hpane = new HBox(10, stop, arrows, start, speedStr, plus, plus2, plus3, minus, minus2, minus3);
+    	hpane.setPadding(new Insets(20, 5, 5, 5));
+    	
+    	BorderPane bpane = new BorderPane();
+    	bpane.setTop(circle);
+    	bpane.setBottom(hpane);
+        Scene scene = new Scene(bpane);
+        
+		primaryStage.setScene(scene);
+		primaryStage.setResizable(false);
+		primaryStage.setWidth(1920);
+		primaryStage.setHeight(1030);
+		primaryStage.setY(0);
+		primaryStage.setX(0);
+		primaryStage.setTitle("Moving ball");
+		primaryStage.show();
+	}
+	public void move(String dir) {
+		TranslateTransition tt = new TranslateTransition(Duration.millis(speed), circle);
+		if (dir.equals("u")) {
+			tt.setToY(0);
+			tt.setInterpolator(Interpolator.LINEAR);
+			tt.play();
+		} else if (dir.equals("d")) {
+			tt.setToY(794);
+			tt.setInterpolator(Interpolator.LINEAR);
+			tt.play();
+		} else if (dir.equals("l")) {
+			tt.setToX(0);
+			tt.setInterpolator(Interpolator.LINEAR);
+			tt.play();
+		} else if (dir.equals("r")) {
+			tt.setToX(1713);
+			tt.setInterpolator(Interpolator.LINEAR);
+			tt.play();
+		} else if (dir.equals("st")) {
+			tt.stop();
+		}
+	}
+}
+
