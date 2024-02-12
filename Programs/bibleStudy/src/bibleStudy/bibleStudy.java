@@ -3,6 +3,8 @@ package bibleStudy;
 import static java.lang.System.out;
 import java.util.Random;
 import java.util.Scanner;
+import java.applet.*;
+import java.awt.*;
 
 class bibleStudy {
 	public static void main(String args[]) {
